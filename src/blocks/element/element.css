@@ -1,0 +1,11 @@
+.element {
+    max-width: 1280px;
+    box-sizing: border-box;
+    height: 56px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid lightblue;
+    padding: 0 16px;
+}
