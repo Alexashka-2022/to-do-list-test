@@ -18,7 +18,7 @@ function TodoListItem({ currentItem, onDeleteButtonClick, onEditButtonClick }) {
 
     return (
         <li className="element">
-            <p className={isComplete ? "element__text_red" : "element__text"}>{currentItem.task}</p>
+            <p className={`element__text ${isComplete ? "element__text_complete" : ""}`}>{currentItem.task}</p>
             <div className="element__button-container">
                 <button type="button" className="element__edit-button" onClick={handleEditButtonClick}></button>
                 <button type="button" className="element__complete-button" onClick={handleCompleteItem}></button>

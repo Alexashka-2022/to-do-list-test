@@ -3,7 +3,7 @@
     font-size: 20px;
 }
 
-.element__text_red {
-    color: red;
+.element__text_complete {
+    color: limegreen;
     font-weight: bold;
 }
