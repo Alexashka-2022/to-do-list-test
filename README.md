@@ -32,3 +32,4 @@ npm run build
 ```
 
 ### Адрес проекта на GitHub Pages
+https://alexashka-2022.github.io/to-do-list-test/index.html
