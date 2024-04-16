@@ -10,3 +10,7 @@
     padding: 0;
     margin: 0;
 }
+
+.element__delete-button:hover {
+    cursor: pointer;
+}

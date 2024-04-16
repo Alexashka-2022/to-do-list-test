@@ -1,0 +1,8 @@
+.todolist__filter {
+    height: 48px;
+    width: 200px;
+}
+
+.todolist__filter:hover {
+    cursor: pointer;
+}

@@ -2,7 +2,7 @@ import { useState } from "react";
 
 function TodoListItem({ currentItem, onDeleteButtonClick, onEditButtonClick }) {
 
-    const [isComplete, setIsComplete] = useState(false)
+    const [isComplete, setIsComplete] = useState(currentItem.isComplete)
 
     function handleDeleteItem() {
         onDeleteButtonClick(currentItem)
@@ -10,6 +10,7 @@ function TodoListItem({ currentItem, onDeleteButtonClick, onEditButtonClick }) {
 
     function handleCompleteItem() {
         setIsComplete(true);
+        currentItem.isComplete = true;
     }
 
     function handleEditButtonClick() {

@@ -8,6 +8,7 @@
 @import url('./blocks/todolist/todolist.css');
 @import url('./blocks/todolist/__add-button/todolist__add-button.css');
 @import url('./blocks/todolist/__elements/todolist__elements.css');
+@import url('./blocks/todolist/__button-container/todolist__button-container.css');
 @import url('./blocks/element/element.css');
 @import url('./blocks/element/__text/element__text.css');
 
@@ -15,6 +16,8 @@
 @import url('./blocks/element/__edit-button/element__edit-button.css');
 @import url('./blocks/element/__complete-button/element__complete-button.css');
 @import url('./blocks/element/__delete-button/element__delete-button.css');
+
+@import url('./blocks/todolist/__filter/todolist__filter.css');
 
 @import url('./blocks/popup/popup.css');
 @import url('./blocks/popup/_opened/popup_opened.css');

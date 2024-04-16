@@ -13,6 +13,8 @@ function App() {
   const [isEditMode, setIsEditMode] = useState(false);
   const [editNewValue, setEditNewValue] = useState("");
   const [editTask, setEditTask] = useState({})
+  const [isFilterMode,setIsFilterMode] = useState(false);
+  const [filteredTasks, setIsFilteredTasks] = useState({})
 
   const isOpen = (isAddPopupOpen || isEditPopupOpen);
 
@@ -50,6 +52,25 @@ function App() {
     setIsEditMode(false)
   }
 
+  function handleFilterTasks(selectedValue) {
+    switch (selectedValue) {
+      case 'filterComplete': 
+        setIsFilteredTasks([...tasks].filter((taskList) => taskList.isComplete === true))
+        setIsFilterMode(true)
+        break
+      case 'filterNoComplete':
+        setIsFilteredTasks([...tasks].filter((taskList) => taskList.isComplete === false))
+        setIsFilterMode(true)
+        break
+        case 'filterReset':
+          setIsFilterMode(false)
+          break
+      default:
+        alert("Нет таких значений");
+        break
+    }
+  }
+
   function closeAllPopups() {
     setIsAddPopupOpen(false);
     setIsEditPopupOpen(false);
@@ -82,10 +103,11 @@ function App() {
     <div className="app">
       <Header />
       <TodoList
-        listItems={tasks}
+        listItems={isFilterMode ? filteredTasks : tasks}
         onAddButtonClick={handleAddPopupOpen}
         onDeleteButtonClick={handleDeleteTask}
         onEditButtonClick={handleEditPopupOpen}
+        onFilterTasks={handleFilterTasks}
       />
       {isEditMode
         ? (<EditTaskPopup
