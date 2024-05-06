@@ -1,76 +1,60 @@
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import Header from "./Header";
 import TodoList from "./TodoList.js"
 import AddTaskPopup from "./AddTaskPopup.js";
 import EditTaskPopup from "./EditTaskPopup.js";
-import { defaultTasks } from "../utils/constants.js";
+import { addTask, changeTask } from "../store/taskSlice.js";
+import { changeFilter } from '../store/filterSlice.js'
 
 
 function App() {
-  const [tasks, setTasks] = useState(defaultTasks);
+  /* состояния */
   const [isAddPopupOpen, setIsAddPopupOpen] = useState(false);
   const [isEditPopupOpen, setIsEditPopupOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editNewValue, setEditNewValue] = useState("");
   const [editTask, setEditTask] = useState({})
-  const [isFilterMode,setIsFilterMode] = useState(false);
-  const [filteredTasks, setIsFilteredTasks] = useState({})
 
   const isOpen = (isAddPopupOpen || isEditPopupOpen);
+  const dispatch = useDispatch();
 
+  /* обработчик добавления задания*/
   function handleAddTask(taskValue) {
     if (taskValue === '') return
 
-    const newTask = { _id: (tasks.length + 1), task: taskValue }
-
-    setTasks([...tasks, newTask])
+    dispatch(addTask({ taskValue }))
   }
 
   function handleAddPopupOpen() {
     setIsAddPopupOpen(true)
   }
 
+  /* обработчик открытия попапа редактирования*/
   function handleEditPopupOpen(currentTask) {
     setIsEditPopupOpen(true)
     setIsEditMode(true)
-    setEditTask(currentTask)
-  }
-
-  function handleDeleteTask(currentTask) {
-    setTasks((taskList) => taskList.filter((i) => i._id !== currentTask._id))
+    setEditTask(currentTask);
+    setEditNewValue(currentTask.task)
   }
 
   function handleEditInputChange(event) {
     setEditNewValue(event.target.value)
   }
 
+  /* обработчик редактирования задания*/
   function handleEditTask(editValue) {
-    const updatedTasks = [...tasks].filter((task) => task._id !== editTask._id)
-    const newTask = { _id: editTask._id, task: editValue }
-    setTasks([newTask, ...updatedTasks])
+    dispatch(changeTask({ _id: editTask._id, task: editValue }))
     setEditNewValue("")
     setIsEditMode(false)
   }
 
+  /* обработчик фильтров*/
   function handleFilterTasks(selectedValue) {
-    switch (selectedValue) {
-      case 'filterComplete': 
-        setIsFilteredTasks([...tasks].filter((taskList) => taskList.isComplete === true))
-        setIsFilterMode(true)
-        break
-      case 'filterNoComplete':
-        setIsFilteredTasks([...tasks].filter((taskList) => taskList.isComplete === false))
-        setIsFilterMode(true)
-        break
-        case 'filterReset':
-          setIsFilterMode(false)
-          break
-      default:
-        alert("Нет таких значений");
-        break
-    }
+    dispatch(changeFilter(selectedValue));
   }
 
+  /* обработчик закрытия попапов*/
   function closeAllPopups() {
     setIsAddPopupOpen(false);
     setIsEditPopupOpen(false);
@@ -103,9 +87,7 @@ function App() {
     <div className="app">
       <Header />
       <TodoList
-        listItems={isFilterMode ? filteredTasks : tasks}
         onAddButtonClick={handleAddPopupOpen}
-        onDeleteButtonClick={handleDeleteTask}
         onEditButtonClick={handleEditPopupOpen}
         onFilterTasks={handleFilterTasks}
       />

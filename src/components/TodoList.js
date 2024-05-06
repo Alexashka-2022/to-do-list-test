@@ -1,6 +1,9 @@
 import TodoListItem from "./TodoListItem";
+import { useSelector } from "react-redux";
+import { selectTasksByFilter } from "../store/selectors";
 
-function TodoList({ listItems, onAddButtonClick, onDeleteButtonClick, onEditButtonClick, onFilterTasks }) {
+function TodoList({ onAddButtonClick, onEditButtonClick, onFilterTasks }) {
+    const listItems = useSelector(selectTasksByFilter);
 
     function handleChangeFilter(evt) {
         onFilterTasks(evt.target.value)
@@ -19,9 +22,8 @@ function TodoList({ listItems, onAddButtonClick, onDeleteButtonClick, onEditButt
                 {listItems.map((item) => {
                     return (
                         <TodoListItem
-                            currentItem={item}
                             key={item._id}
-                            onDeleteButtonClick={onDeleteButtonClick}
+                            {...item}
                             onEditButtonClick={onEditButtonClick}
                         />
 

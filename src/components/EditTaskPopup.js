@@ -7,6 +7,7 @@ function EditTaskPopup(props) {
         props.onSubmit(props.editNewValue);
         props.onClose();
     }
+
     return (
         <PopupWithForm
             title={props.title}
