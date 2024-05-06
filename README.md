@@ -11,6 +11,7 @@
 4. flex
 5. BEM Nested
 6. React.js
+7. Redux toolkit
 
 ## Запуск
 Клонируем репозиторий.
@@ -30,6 +31,12 @@ npm run start
 
 ```gitbash
 npm run build
+```
+
+Для деплоя на GitHub Pages
+
+```gitbash
+npm run deploy
 ```
 
 ### Адрес проекта на GitHub Pages
